@@ -18,6 +18,6 @@ class LearningSession(models.Model):
 
     def duration(self):
         return self.end_date - self.start_date
-        
+
     def __str__(self):
         return f'{self.user} - learning session'

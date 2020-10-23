@@ -12,7 +12,7 @@
         {% endif %}
         <form action="{% url 'learning_marathon:index' %}" method="POST">
             {% csrf_token %}
-         {% if user.now_learning and user.theory %}
+        {% if user.now_learning and user.theory %}
         <button type='submit' value='' name='theory' style='background-color: rgba(255, 255, 255, 0);border-color: rgba(255, 255, 255, 0);'>
             <img id='status-learning'
                 style="max-width: 100%;width:550px"
@@ -50,19 +50,19 @@
                 src="{% static 'learning_marathon/progress.png' %}"
                 />
         </button>
-            {% elif user.now_learning and user.theory %}
-            <img id='status-learning-other'
-                style="max-width: 100%;width:550px"
-                src="{% static 'learning_marathon/stop.png' %}"
-                />
-            {% else %}
+        {% elif user.now_learning and user.theory %}
+        <img id='status-learning-other'
+            style="max-width: 100%;width:550px"
+            src="{% static 'learning_marathon/stop.png' %}"
+            />
+        {% else %}
         <button type='submit' value='' name='practice' style='background-color: rgba(255, 255, 255, 0);border-color: rgba(255, 255, 255, 0);'>
             <img id='status'
                 style="max-width: 100%;width:550px"
                 src="{% static 'learning_marathon/start.png' %}"
                 />
         </button>
-            {% endif %}
+        {% endif %}
         </form>
     </div>
 </div>
