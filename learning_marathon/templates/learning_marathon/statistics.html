@@ -1,0 +1,61 @@
+{% extends 'learning_marathon/layout.html' %}
+{% load static %}
+{% block body %}
+<div class='p-md-5 m-1'>
+    <div class='row align-content-center m-3 bg-dark' style='color:whitesmoke;border-radius:10px;min-height:70px'>
+        <div class='col-lg-2'>
+        </div>
+        <div class='col-lg-5'>
+            <p id='name'>Theory</p>
+        </div>
+        <div class='col-lg-5 text-right'>
+            <p id='name'>Practice</p>
+        </div>
+    </div>
+
+
+    {% for day in data %}
+    <div class='row align-content-center m-3' style='min-height:50px'>
+        <div class='col-lg-2'>
+            {{ day.day }}
+        </div>
+        <div class='col-lg-1'>
+            {{ day.theory }}
+        </div>
+        <div class='col-lg-4'>
+            {% if day.rewards %}
+            {% for reward in day.rewards|get_range %}
+            <i style='height: 20px;font-size: 20px;' class="fas fa-star"></i>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class='col-lg-4 text-right'>
+            {% if day.rewards_practice %}
+            {% for reward in day.rewards_practice|get_range %}
+            <i style='height: 20px;font-size: 20px;' class="far fa-star"></i>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class='col-lg-1 text-right'>
+            {{ day.practice }}
+        </div>
+
+    </div>
+
+    <hr />
+    {% endfor %}
+
+    <div class='row align-content-center m-3 bg-dark' style='color:whitesmoke;border-radius:10px;min-height:70px'>
+        <div class='col-lg-2'>
+            Summary: <i style='height: 20px;font-size: 30px;' class="fas fa-star"></i>
+        </div>
+        <div class='col-lg-5'>
+            <p id='name'>{{ summary.theory_summary }}</p>
+        </div>
+        <div class='col-lg-5 text-right'>
+            <p id='name'>{{ summary.practice_summary }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

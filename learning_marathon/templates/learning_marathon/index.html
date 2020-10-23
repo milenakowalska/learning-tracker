@@ -1,0 +1,75 @@
+{% extends 'learning_marathon/layout.html' %}
+{% load static %}
+{% block body %}
+
+<div class='row'>
+    <div class='col-lg-6 justify-content-center text-center'>
+        <h1>Learn theory</h1>
+        {% if user.theory %}
+            <h3><i class="fas fa-thumbs-up" style='color:green'></i> You are learning now, keep going! :-)</h3>
+        {% else %}
+            <h3><i class="far fa-frown" style='color:rgb(255, 60, 53)'></i> You're not learning now - let's learn!</h3>
+        {% endif %}
+        <form action="{% url 'learning_marathon:index' %}" method="POST">
+            {% csrf_token %}
+         {% if user.now_learning and user.theory %}
+        <button type='submit' value='' name='theory' style='background-color: rgba(255, 255, 255, 0);border-color: rgba(255, 255, 255, 0);'>
+            <img id='status-learning'
+                style="max-width: 100%;width:550px"
+                src="{% static 'learning_marathon/progress.png' %}"
+                />
+        </button>
+        {% elif user.now_learning and not user.theory %}
+        <img id='status-learning-other'
+                style="max-width: 100%;width:550px"
+                src="{% static 'learning_marathon/stop.png' %}"
+                />
+        {% else %}
+        <button type='submit' value='' name='theory' style='background-color: rgba(255, 255, 255, 0);border-color: rgba(255, 255, 255, 0);'>
+        <img id='status'
+            style="max-width: 100%;width:550px"
+            src="{% static 'learning_marathon/start.png' %}"
+            />
+        </button>
+        {% endif %}
+        </form>
+    </div>
+    <div class='col-lg-6 justify-content-center text-center'>
+    <h1>Enough theory - time for practice!</h1>
+    {% if user.now_learning and not user.theory %}
+    <h3><i class="fas fa-thumbs-up" style='color:green'></i> You are learning now, keep going! :-)</h3>
+    {% else %}
+        <h3><i class="far fa-frown" style='color:rgb(255, 60, 53)'></i> You're not learning now - let's learn!</h3>
+    {% endif %}
+        <form action="{% url 'learning_marathon:index' %}" method="POST">
+            {% csrf_token %}
+        {% if user.now_learning and not user.theory %}
+        <button type='submit' value='' name='practice' style='background-color: rgba(255, 255, 255, 0);border-color: rgba(255, 255, 255, 0);'>
+            <img id='status-learning'
+                style="max-width: 100%;width:550px"
+                src="{% static 'learning_marathon/progress.png' %}"
+                />
+        </button>
+            {% elif user.now_learning and user.theory %}
+            <img id='status-learning-other'
+                style="max-width: 100%;width:550px"
+                src="{% static 'learning_marathon/stop.png' %}"
+                />
+            {% else %}
+        <button type='submit' value='' name='practice' style='background-color: rgba(255, 255, 255, 0);border-color: rgba(255, 255, 255, 0);'>
+            <img id='status'
+                style="max-width: 100%;width:550px"
+                src="{% static 'learning_marathon/start.png' %}"
+                />
+        </button>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+
+

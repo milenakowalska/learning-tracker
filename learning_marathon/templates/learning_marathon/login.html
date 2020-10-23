@@ -1,0 +1,25 @@
+{% extends 'learning_marathon/layout.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class='row justify-content-center'>
+    <div class='col-md-6 justify-content-center text-center'>
+        <img src="{% static 'learning_marathon/logo_transparent.png' %}" style="max-width: 100%;"/>
+    </div>
+
+    <div id='form-login' class='align-self-center bg-dark p-4 m-5 col-md-5 text-center'>
+        <h1 class='mb-5'>Login</h1>
+        <form action="{% url 'learning_marathon:login' %}" method="POST">
+            {% csrf_token %}
+            <div class='form-group'>
+                <input type='text' class='form-control form-control-lg' placeholder="Email" name='email' /><br />
+                <input type=password class='form-control form-control-lg' placeholder="Password" name='password' /><br />
+                <input type="submit" class='btn btn-danger btn-lg mt-3' value='Sign in'/>
+            </div>
+        </form>
+        <p>Need an Account? <a href="{% url 'learning_marathon:register' %}">Get started now!</a></p>
+    </div>
+</div>
+
+{% endblock %}
